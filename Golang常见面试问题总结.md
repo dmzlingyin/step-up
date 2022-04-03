@@ -92,7 +92,7 @@ type hmap struct {
 
 
 
-![image-20220403171936230](C:\Users\lingyin\AppData\Roaming\Typora\typora-user-images\image-20220403171936230.png)
+![image-20220403171936230](images/image-20220403171936230.png)
 
 上图为整个哈希表的实际结构。
 
@@ -102,7 +102,7 @@ type hmap struct {
 
 #### 1. value的查找过程
 
-![image-20220403172711634](C:\Users\lingyin\AppData\Roaming\Typora\typora-user-images\image-20220403172711634.png)
+![image-20220403172711634](images/image-20220403172711634.png)
 
 ```go
 如上图所示，在查找的时候，runtime会使用哈希函数对key做哈希运算(不同类型的key哈希函数不同)得到hashcode。hashcode的低位区会匹配到对应的bucket，hashcode的高位区用于匹配tophash。具体过程为先比较hashcode的高位区域bucket的tophsash[i]是否相等，如果相等则再比较bucket的第i个key与所要查找的key是否相等，如果相等，则返回第i个value；如果不相等，则在overflow buckets中按照上述步骤继续查找。
