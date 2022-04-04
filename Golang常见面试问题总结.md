@@ -151,6 +151,8 @@ type hmap struct {
 
 ```go
 从上面的map实现原理来看，充当map描述符角色的hmap实例自身是有状态的(hmap.flags)，且对状态的读写是没有并发保护的，因此map实例并不是并发写安全的，不支持并发读写。如果仅仅是并发读，是没有问题的。
+
+go1.9版本提供了sync.Map实现map的安全并发读写。
 ```
 
 
@@ -167,6 +169,36 @@ new和make都涉及到内存的分配，但两者还是存在区别的。
 
 
 > ## 6. string实现原理
+
+```go
+1. string为不可变类型
+2. 由于string的不可变特性，字符串的比较分为如下步骤：
+	1) 如果两个字符串长度不同，则两个字符串是不同的
+	2) 如果两个字符串长度相等，则要进一步判断数据指针是否指向同一块底层存储数据。如果相同，则两个字符串是等价的。
+	3) 如果长度相等，指针指向不同，则还需进一步比对实际的数据内容。
+3. go提供了通过反引号构造“所见即所得”的多行字符串的方法。
+```
+
+```go
+$GOROOT/src/runtime/string.go
+type stringStruct struct {
+    str unsafe.Pointer
+    len int
+}
+
+// 该函数为新的字符串分配内存，由于新申请的内存区域还未被写入数据，所以slice b被用来设置字符串内容，之后被回收掉。
+func rawstring(size int) (s string, b []byte) {
+    p := mallocgc(uintptr(size), nil, false)
+    
+    stringStructOf(&s).str = p
+    stringStructOf(&s),len = size
+    
+    *(*slice)(unsafe.Pointer(&b)) = slice{p, size, size}
+    return
+}
+```
+
+
 
 > ## 7. channel的特性
 
@@ -222,8 +254,8 @@ new和make都涉及到内存的分配，但两者还是存在区别的。
 
 ```go
 goroutine: 对应CSP模型中的P， 封装了数据的处理逻辑，是Go运行时调度的基本执行单元(操作系统的基本调度单元是thread)
-channel：对应CSP模型中的输入/输出原语，用于goroutin中的通信和同步
-select：用于应对多路输入/输出，可以让goroutine同时协调处理多个channel操作。
+channel: 对应CSP模型中的输入/输出原语，用于goroutin中的通信和同步
+select: 用于应对多路输入/输出，可以让goroutine同时协调处理多个channel操作。
 ```
 
 * <font color='blue'>创建模式</font>
