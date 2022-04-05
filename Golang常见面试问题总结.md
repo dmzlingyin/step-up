@@ -223,7 +223,80 @@ func rawstring(size int) (s string, b []byte) {
 
 * 无缓冲的channel是同步的，有缓冲的channel是非同步的
 
+
+
+
+
 > ## 8. Golang互斥锁的两种实现：sync和channel
+
+<font color='red'>1. 共享内存 + 锁</font>
+
+```go
+type counter struct {
+    sync.Mutex
+    i int
+}
+
+var cter counter
+func Increase() int {
+    cter.Lock()
+    defer cter.Unlock()
+    cter.i++
+    return cter.i
+}
+
+func main() {
+    for i := 0; i < 10; i++ {
+        go func() {
+            _ = Increase() 
+        }()
+    }
+    time.Sleep(3 * time.Second)
+}
+```
+
+<font color='red'>2. 无缓冲channel实现锁</font>
+
+```go
+type counter struct {
+    c chan int
+    i int
+}
+
+var cter counter
+func InitCounter() {
+    c := counter {
+        c: make(chan int),
+    }
+    
+    go func() {
+        for {
+            cter.i++
+            cter.c <-cter.i
+        } 
+    }()
+    fmt.Println("counter init ok.")
+}
+
+func Increase() int {
+    return <-cter.c
+}
+
+func init() {
+    InitCounter()
+}
+
+func main() {
+    for i := 0; i < 10; i++ {
+        go func() {
+            _ = Increase() 
+        }()
+    }
+    time.Sleep(3 * time.Second)
+}
+```
+
+
 
 > ## 9. GMP调度模型
 
