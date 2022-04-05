@@ -304,6 +304,30 @@ func main() {
 
 > ## 11. GC垃圾回收
 
+```go
+1. mark-sweep(标记-清扫) 缺点：内存碎片
+2. mark-compact(标记-压缩) 缺点：计算量大，实现复杂，cpu缓存
+3. semispace copy(半空间复制)
+4. reference counting(引用计数) python使用
+5. 分代GC(扫描年轻的对象，存活时间越长的对象越容易是有用的对象)
+```
+
+```go
+go为什么不选择压缩GC?
+go为什么不选择分代GC?
+内存逃逸？
+```
+
+<font size='18' color='red'> GO的GC算法：并发、增量、准确式三色标记</font>
+
+```go
+1. 根对象
+2. 栈对象
+3. 灰色对象（三色：黑色，灰色，白色）
+```
+
+
+
 > ## 12. go tools
 
 * go run
