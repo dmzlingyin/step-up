@@ -372,3 +372,8 @@ select: 用于应对多路输入/输出，可以让goroutine同时协调处理�
   * 扇出模式
   * 扇入模式
 * <font color='blue'>超时与取消模式</font>
+
+> ## Go1.18 泛型
+
+
+
