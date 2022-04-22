@@ -1,0 +1,30 @@
+Time        PID: 0        PID: 1           CPU           IOs
+  1         RUN:io         READY             1          
+  2        WAITING       RUN:cpu             1             1
+  3        WAITING       RUN:cpu             1             1
+  4        WAITING       RUN:cpu             1             1
+  5        WAITING       RUN:cpu             1             1
+  6        WAITING          DONE                           1
+  7*   RUN:io_done          DONE             1          
+
+Stats: Total Time 7
+Stats: CPU Busy 6 (85.71%)
+Stats: IO Busy  5 (71.43%)
+
+Time        PID: 0        PID: 1        PID: 2           CPU           IOs
+  1         RUN:io         READY         READY             1          
+  2        WAITING       RUN:cpu         READY             1             1
+  3        WAITING       RUN:cpu         READY             1             1
+  4        WAITING       RUN:cpu         READY             1             1
+  5        WAITING       RUN:cpu         READY             1             1
+  6        WAITING          DONE       RUN:cpu             1             1
+  7*         READY          DONE       RUN:cpu             1          
+  8          READY          DONE       RUN:cpu             1          
+  9          READY          DONE       RUN:cpu             1          
+ 10    RUN:io_done          DONE          DONE             1          
+
+Stats: Total Time 10
+Stats: CPU Busy 10 (100.00%)
+Stats: IO Busy  5 (50.00%)
+
+From above, we can see that the switching order matter.
