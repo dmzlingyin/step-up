@@ -10,6 +10,7 @@ int main() {
         fprintf(stderr, "fork failed.\n");
         exit(1);
     } else if (rc == 0) {
+        printf("%d\n", STDOUT_FILENO);
         close(STDOUT_FILENO);
         printf("test\n");
     } else {
