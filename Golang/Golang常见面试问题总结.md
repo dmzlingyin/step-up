@@ -377,5 +377,26 @@ select: 用于应对多路输入/输出，可以让goroutine同时协调处理�
 
 > ## Go1.18 泛型
 
+> ### 接口内部实现
+
+```go
+1. 接口类型变量在运行时表示为eface和iface，eface用于表示空接口类型变量(var a interface{}),iface用于表示非空接口类型变量(var err error)
+2. 两个接口相等：
+	1): eface._type/iface.tab._type相等 
+	2): 数据指针(unsafe.Pointer)指向的数据值相等
+```
+
+```go
+$GOROOT/src/runtime/runtime2.go
+type eface struct {
+    _type 	*_type
+    data	unsafe.Pointer
+}
+type iface struct {
+    _type	*_type
+    data	unsafe.Pointer
+}
+```
+
 
 
