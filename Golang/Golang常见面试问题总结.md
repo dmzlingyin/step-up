@@ -68,6 +68,7 @@ func growslice(et *_et, old slice, cap int) slice {
 	m["key"] = 1 // panic
 3. 一定要使用“comma ok”惯用法读取map中的值。
 4. 不要依赖遍历map所得到的元素次序(数据库也是，一定要用ORDER BY)。
+5. cap不能用于map。
 ```
 
 
