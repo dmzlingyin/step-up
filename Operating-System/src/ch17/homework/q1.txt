@@ -1,0 +1,48 @@
+seed 0
+size 100
+baseAddr 1000
+headerSize 0
+alignment -1
+policy BEST
+listOrder ADDRSORT
+coalesce False
+numOps 10
+range 10
+percentAlloc 50
+allocList 
+compute False
+
+ptr[0] = Alloc(3) returned ?
+List? 
+
+Free(ptr[0])
+returned ?
+List? 
+
+ptr[1] = Alloc(5) returned ?
+List? 
+
+Free(ptr[1])
+returned ?
+List? 
+
+ptr[2] = Alloc(8) returned ?
+List? 
+
+Free(ptr[2])
+returned ?
+List? 
+
+ptr[3] = Alloc(8) returned ?
+List? 
+
+Free(ptr[3])
+returned ?
+List? 
+
+ptr[4] = Alloc(2) returned ?
+List? 
+
+ptr[5] = Alloc(7) returned ?
+List? 
+
