@@ -15,9 +15,8 @@ main(int argc, char *argv[])
         exit(1);
     }
     
-    int NUMPAGES = *argv[1] - '0';
-    int TRYS = *argv[2] - '0';
-    printf("%s, %s\n", NUMPAGES, TRYS); 
+    int NUMPAGES = atoi(argv[1]);
+    int TRYS = atoi(argv[2]);
     
     int a[NUMPAGES*PAGESIZE/sizeof(int)];
     int jump = PAGESIZE / sizeof(int);
@@ -32,7 +31,7 @@ main(int argc, char *argv[])
         sum += (end - start);
    }
     
-    printf("mean cost: %d ns.\n", sum / TRYS);
+    printf("pages: %d\t mean cost: %d ns.\n",NUMPAGES, sum / TRYS);
     return 0;
 }
 
