@@ -1,0 +1,55 @@
+ARG seed 0
+ARG numthreads 2
+ARG program looping-race-nolock.s
+ARG interrupt frequency 50
+ARG interrupt randomness False
+ARG argv bx=3
+ARG load address 1000
+ARG memsize 128
+ARG memtrace 2000
+ARG regtrace 
+ARG cctrace False
+ARG printstats False
+ARG verbose False
+
+ 2000          Thread 0                Thread 1         
+    0   
+    0   1000 mov 2000, %ax
+    0   1001 add $1, %ax
+    1   1002 mov %ax, 2000
+    1   1003 sub  $1, %bx
+    1   1004 test $0, %bx
+    1   1005 jgt .top
+    1   1000 mov 2000, %ax
+    1   1001 add $1, %ax
+    2   1002 mov %ax, 2000
+    2   1003 sub  $1, %bx
+    2   1004 test $0, %bx
+    2   1005 jgt .top
+    2   1000 mov 2000, %ax
+    2   1001 add $1, %ax
+    3   1002 mov %ax, 2000
+    3   1003 sub  $1, %bx
+    3   1004 test $0, %bx
+    3   1005 jgt .top
+    3   1006 halt
+    3   ----- Halt;Switch -----  ----- Halt;Switch -----  
+    3                            1000 mov 2000, %ax
+    3                            1001 add $1, %ax
+    4                            1002 mov %ax, 2000
+    4                            1003 sub  $1, %bx
+    4                            1004 test $0, %bx
+    4                            1005 jgt .top
+    4                            1000 mov 2000, %ax
+    4                            1001 add $1, %ax
+    5                            1002 mov %ax, 2000
+    5                            1003 sub  $1, %bx
+    5                            1004 test $0, %bx
+    5                            1005 jgt .top
+    5                            1000 mov 2000, %ax
+    5                            1001 add $1, %ax
+    6                            1002 mov %ax, 2000
+    6                            1003 sub  $1, %bx
+    6                            1004 test $0, %bx
+    6                            1005 jgt .top
+    6                            1006 halt
