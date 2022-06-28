@@ -1,3 +1,4 @@
+/* counter without locks */
 typedef struct __counter_t
 {
     int value;
