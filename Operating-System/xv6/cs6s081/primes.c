@@ -1,6 +1,10 @@
 #include "kernel/types.h"
 #include "user/user.h"
 
+/*
+质数筛详情:https://swtch.com/~rsc/thread/
+ */
+
 int
 main(int argc, char *argv[])
 {
