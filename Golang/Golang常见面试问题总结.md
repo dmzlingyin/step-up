@@ -362,7 +362,7 @@ go为什么不选择分代GC?
 
 ```go
 goroutine: 对应CSP模型中的P， 封装了数据的处理逻辑，是Go运行时调度的基本执行单元(操作系统的基本调度单元是thread)
-channel: 对应CSP模型中的输入/输出原语，用于goroutin中的通信和同步
+channel: 对应CSP模型中的输入/输出原语，用于goroutine中的通信和同步
 select: 用于应对多路输入/输出，可以让goroutine同时协调处理多个channel操作。
 ```
 
