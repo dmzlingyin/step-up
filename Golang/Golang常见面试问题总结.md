@@ -319,7 +319,7 @@ go为什么不选择分代GC?
 内存逃逸？
 ```
 
-<font size='18' color='red'> GO的GC算法：并发、增量、准确式三色标记</font>
+GO的GC算法：并发、增量、准确式三色标记
 
 ```go
 1. 根对象
@@ -355,8 +355,6 @@ go为什么不选择分代GC?
 
 2. sync.Once实现单例模式，once.Do(f), 多个goroutine执行时，只有一个goroutine可以执行f函数
 ```
-
-
 
 > ### atomatic包的使用
 
