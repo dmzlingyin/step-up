@@ -1,13 +1,13 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	s := make([]int, 5)
-	fmt.Println(cap(s), len(s))
+	defer foo(1, foo(3, 0))
+	defer foo(2, foo(4, 0))
+}
 
-	s = append(s, 1, 2, 3)
-	fmt.Println(cap(s), len(s))
+func foo(index, value int) int {
+	fmt.Println(index)
+	return index
 }
