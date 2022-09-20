@@ -1,3 +1,0 @@
-build:
-	gcc pointer.c
-
