@@ -665,6 +665,7 @@ procdump(void)
   [RUNNABLE]  "runble",
   [RUNNING]   "run   ",
   [ZOMBIE]    "zombie"
+
   };
   struct proc *p;
   char *state;
@@ -680,4 +681,17 @@ procdump(void)
     printf("%d %s %s", p->pid, state, p->name);
     printf("\n");
   }
+}
+
+uint64
+count_process(void)
+{
+  uint64 cnt = 0;
+  struct proc *p;
+  
+  for(p = proc; p < &proc[NPROC]; p++) {
+    if(p->state != UNUSED)
+     cnt++;
+  }
+  return cnt;
 }
