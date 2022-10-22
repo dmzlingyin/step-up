@@ -138,6 +138,7 @@ UPROGS=\
 	$U/_uptime\
 	$U/_trace\
 	$U/_sysinfotest\
+	$U/_pgtbltest\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
