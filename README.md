@@ -5,7 +5,7 @@
 * Operating Systems-three easy pieces (英文原版pdf)
 * 书籍代码(C语言)
 * xv6源码
-
+* MIT 6.828
 
 
 #### 计算机网络
@@ -16,6 +16,7 @@
 
 #### MySQL数据库
 
+* SQL必知必会
 * MySQL必知必会(微信读书)
 * 高性能MySQL(pdf)
 
