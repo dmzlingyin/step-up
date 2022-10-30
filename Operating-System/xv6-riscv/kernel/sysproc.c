@@ -1,11 +1,10 @@
 #include "types.h"
 #include "riscv.h"
-#include "defs.h"
 #include "param.h"
+#include "defs.h"
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
-#include "sysinfo.h"
 
 uint64
 sys_exit(void)
@@ -55,6 +54,7 @@ sys_sleep(void)
   int n;
   uint ticks0;
 
+
   argint(0, &n);
   acquire(&tickslock);
   ticks0 = ticks;
@@ -68,6 +68,16 @@ sys_sleep(void)
   release(&tickslock);
   return 0;
 }
+
+
+#ifdef LAB_PGTBL
+int
+sys_pgaccess(void)
+{
+  // lab pgtbl: your code here.
+  return 0;
+}
+#endif
 
 uint64
 sys_kill(void)
@@ -89,29 +99,4 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
-}
-
-uint64
-sys_trace(void)
-{
-  int mask;
-  argint(0, &mask); 
-  myproc()->syscall_trace = mask;
-  return 0;
-}
-
-uint64
-sys_sysinfo(void)
-{
-  uint64 addr;
-  argaddr(0, &addr);
-
-  struct sysinfo sf;
-  sf.freemem = count_freemem();
-  sf.nproc = count_process();
-
-  struct proc *p = myproc(); 
-  if(copyout(p->pagetable, addr, (char *)&sf, sizeof(sf)) < 0)
-    return -1;
-  return 0;
 }
